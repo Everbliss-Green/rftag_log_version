@@ -63,6 +63,13 @@
   ul { margin: 0; padding-left: 20px; }
   li { margin: 7px 0; color: #c3cdd8; font-size: 0.96rem; }
   li b { color: var(--text); font-weight: 600; }
+  .tag-dev {
+    display: inline-block; margin-left: 6px; vertical-align: middle;
+    padding: 1px 8px; border-radius: 999px; font-size: 0.68rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: #f0b429; background: rgba(240,180,41,0.14);
+    border: 1px solid rgba(240,180,41,0.4);
+  }
 
   footer {
     text-align: center; color: var(--muted); font-size: 0.8rem;
@@ -85,15 +92,15 @@
     <div class="body">
       <h2>New features</h2>
       <ul>
-        <li><b>Point of Interest (POI) pings</b> — ping a location to the whole group; it drops a map pin and points everyone's LED ring toward the spot.</li>
-        <li><b>POI card in chat</b> — pings appear as a tappable chat card with the coordinates and a shortcut to open the radar.</li>
+        <li><b>Point of Interest (POI) pings</b> <span class="tag-dev">In development</span> — ping a location to the whole group; it drops a map pin and points everyone's LED ring toward the spot. Works under the right conditions today; still being refined and will need some refactoring.</li>
+        <li><b>POI card in chat</b> <span class="tag-dev">In development</span> — pings appear as a tappable chat card with the coordinates and a shortcut to open the radar.</li>
         <li><b>Off-screen icons stay on the edge</b> — when a member or target is outside the visible map, its icon pins to the edge of the radar as an arrow pointing toward it. Tap the arrow to recenter the map on it.</li>
         <li><b>Fall Detection Alarm toggle</b> — turn the automatic alarm on or off from the profile screen. Turning it off asks to confirm, and the change is sent to your tag right away.</li>
         <li><b>GPS source indicator</b> — your “you are here” marker now shows whether your position is coming from your RFTag's GPS or from your phone's GPS, so you always know which one is in use.</li>
       </ul>
       <h2>Firmware <span style="color:var(--muted);font-weight:400;">(v2.2.2-85)</span></h2>
       <ul>
-        <li><b>Point of Interest (POI) targeting</b> — when a leader pings a point of interest, the LED ring points the whole group toward it. The pinged location is temporary and auto-clears after 5 minutes.</li>
+        <li><b>Point of Interest (POI) targeting</b> <span class="tag-dev">In development</span> — when a leader pings a point of interest, the LED ring points the whole group toward it. The pinged location stays active until it's cleared or replaced by a new ping. Works under the right conditions today; still being refined and will need some refactoring.</li>
         <li><b>Fall detection on/off</b> — the tag now honors the app's Fall Detection toggle. The manual SOS button still works regardless of the setting.</li>
         <li><b>Distinct emergency lights</b> — your own emergency now shows a slow red “breathe,” making it easy to tell apart from a received alert from someone else in the group.</li>
         <li><b>Accurate no-fix reporting</b> — when the tag loses its GPS fix, the NO_FIX status is now written into its internal location list, so the app, the group, and the compass see the real no-fix state instead of a stale position. The last-known spot is kept but not saved to history.</li>
