@@ -93,10 +93,10 @@
       </ul>
       <h2>Firmware <span style="color:var(--muted);font-weight:400;">(v2.2.2-85)</span></h2>
       <ul>
-        <li><b>POI “ping a location” mode</b> — the LED ring can now point at a fixed coordinate set by a leader; the ping is temporary and auto-clears after 5 minutes.</li>
+        <li><b>Point of Interest (POI) targeting</b> — when a leader pings a point of interest, the LED ring points the whole group toward it. The pinged location is temporary and auto-clears after 5 minutes.</li>
         <li><b>Fall detection on/off</b> — the tag now honors the app's Fall Detection toggle. The manual SOS button still works regardless of the setting.</li>
         <li><b>Distinct emergency lights</b> — your own emergency now shows a slow red “breathe,” making it easy to tell apart from a received alert from someone else in the group.</li>
-        <li><b>Accurate no-fix reporting</b> — when the tag loses its GNSS fix it now reports NO_FIX correctly instead of showing a stale position, which powers the new GPS source indicator.</li>
+        <li><b>Accurate no-fix reporting</b> — when the tag loses its GPS fix, the NO_FIX status is now written into its internal location list, so the app, the group, and the compass see the real no-fix state instead of a stale position. The last-known spot is kept but not saved to history.</li>
         <li><b>In-app PIN security</b> — BLE access is gated behind an in-app PIN (the value lasered on the device) instead of OS-level pairing.</li>
         <li><b>Over-the-air BLE updates</b> — firmware can update over BLE for easier recovery and updates; images are still verified before they're applied. The app will prompt you to update.</li>
       </ul>
