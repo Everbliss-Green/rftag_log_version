@@ -3,270 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="RFTag app release notes — Version 1.1 for iOS and Android.">
-<title>RFTag · What's New in 1.1</title>
+<meta name="description" content="RFTag app release notes for iOS and Android.">
+<title>RFTag · Release Notes</title>
 <style>
   :root {
     --bg: #0b0f14;
-    --bg-soft: #11171f;
     --card: #141b24;
-    --card-border: #1f2a36;
+    --border: #1f2a36;
     --text: #e6edf3;
     --muted: #8b97a5;
     --green: #22c55e;
-    --green-dim: rgba(34,197,94,0.14);
-    --orange: #f97316;
-    --orange-dim: rgba(249,115,22,0.14);
-    --accent-line: linear-gradient(90deg, var(--green), var(--orange));
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: radial-gradient(1200px 600px at 50% -10%, #15202c 0%, var(--bg) 55%);
+    background: var(--bg);
     color: var(--text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px 64px; }
+  .wrap { max-width: 620px; margin: 0 auto; padding: 56px 20px 64px; }
 
-  /* Hero */
-  header.hero { text-align: center; padding: 64px 20px 40px; }
-  .logo-dot {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 60px; height: 60px; border-radius: 16px;
-    background: var(--green-dim); border: 1px solid var(--card-border);
-    margin-bottom: 18px;
-  }
-  .logo-dot svg { display: block; }
-  h1 { font-size: 2.1rem; margin: 0 0 6px; letter-spacing: -0.02em; }
-  .version-badge {
-    display: inline-block; margin: 10px 0 14px;
-    padding: 5px 14px; border-radius: 999px;
-    background: var(--green-dim); color: var(--green);
-    font-weight: 600; font-size: 0.95rem; letter-spacing: 0.02em;
-    border: 1px solid rgba(34,197,94,0.35);
-  }
-  .tagline { color: var(--muted); margin: 0 auto; max-width: 480px; font-size: 1.02rem; }
-  .release-date { color: var(--muted); font-size: 0.85rem; margin-top: 14px; }
-  .platforms { margin-top: 20px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); margin: 0 0 32px; font-size: 0.95rem; }
 
-  /* Section title */
-  .section-title {
-    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.14em;
-    color: var(--muted); margin: 40px 0 16px; font-weight: 700;
+  /* Version accordion */
+  details {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
   }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+  }
+  summary::-webkit-details-marker { display: none; }
+  .ver { font-size: 1.1rem; }
+  .date { color: var(--muted); font-weight: 400; font-size: 0.85rem; }
+  .chev {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+    color: var(--muted);
+  }
+  details[open] .chev { transform: rotate(90deg); }
 
-  /* Cards */
-  .card {
-    background: var(--card); border: 1px solid var(--card-border);
-    border-radius: 16px; padding: 22px 22px 20px; margin-bottom: 16px;
-    position: relative; overflow: hidden;
+  .body { padding: 0 18px 18px; border-top: 1px solid var(--border); }
+  .body h2 {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--muted); margin: 18px 0 8px;
   }
-  .card::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-    background: var(--accent-line); opacity: 0.9;
-  }
-  .card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-  .card-icon {
-    flex: 0 0 auto; width: 40px; height: 40px; border-radius: 11px;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--bg-soft); border: 1px solid var(--card-border);
-  }
-  .card-icon.green { background: var(--green-dim); }
-  .card-icon.orange { background: var(--orange-dim); }
-  .card h3 { margin: 0; font-size: 1.12rem; letter-spacing: -0.01em; }
-  .card p { margin: 0; color: #c3cdd8; font-size: 0.97rem; }
-  .card p + p { margin-top: 8px; }
+  ul { margin: 0; padding-left: 20px; }
+  li { margin: 7px 0; color: #c3cdd8; font-size: 0.96rem; }
+  li b { color: var(--text); font-weight: 600; }
 
-  /* Badges */
-  .badges { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 14px; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 600;
-    background: var(--bg-soft); color: var(--muted); border: 1px solid var(--card-border);
-  }
-  .badge svg { display: block; opacity: 0.9; }
-
-  /* Firmware callout */
-  .fw {
-    background: linear-gradient(180deg, rgba(249,115,22,0.10), rgba(249,115,22,0.03));
-    border: 1px solid rgba(249,115,22,0.35);
-    border-radius: 16px; padding: 22px; margin-top: 8px;
-  }
-  .fw .card-head { margin-bottom: 10px; }
-  .fw h3 { color: #ffd9bb; }
-  .fw ul { margin: 6px 0 0; padding-left: 18px; color: #d8c3b3; }
-  .fw li { margin: 4px 0; }
-  .fw .note { margin-top: 12px; font-size: 0.86rem; color: var(--muted); }
-
-  /* Footer */
   footer {
-    text-align: center; color: var(--muted); font-size: 0.82rem;
-    margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--card-border);
-  }
-  footer a { color: var(--green); text-decoration: none; }
-
-  @media (max-width: 480px) {
-    h1 { font-size: 1.7rem; }
-    .card { padding: 18px; }
+    text-align: center; color: var(--muted); font-size: 0.8rem;
+    margin-top: 40px;
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header class="hero">
-    <span class="logo-dot" aria-hidden="true">
-      <!-- radar / location pin -->
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="9"></circle>
-        <circle cx="12" cy="12" r="4"></circle>
-        <line x1="12" y1="3" x2="12" y2="6"></line>
-        <line x1="12" y1="18" x2="12" y2="21"></line>
-        <line x1="3" y1="12" x2="6" y2="12"></line>
-        <line x1="18" y1="12" x2="21" y2="12"></line>
-      </svg>
-    </span>
-    <h1>RFTag</h1>
-    <div class="version-badge">Version 1.1</div>
-    <p class="tagline">Find your group, ping a spot on the map, and keep everyone pointed in the same direction.</p>
-    <div class="platforms">
-      <span class="badge">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="#e6edf3"><path d="M16.4 1.6c.1 1-.3 2-.9 2.7-.6.8-1.6 1.4-2.6 1.3-.1-1 .4-2 .9-2.6.6-.8 1.7-1.3 2.6-1.4zM19.3 17c-.5 1.2-.8 1.7-1.4 2.7-.9 1.4-2.1 3.1-3.6 3.1-1.3 0-1.7-.9-3.5-.9s-2.2.8-3.5.9c-1.5.1-2.6-1.5-3.5-2.9C1.5 17.1.6 12.4 2.2 9.3c.8-1.5 2.3-2.5 3.9-2.5 1.3 0 2.5.9 3.3.9.8 0 2.3-1.1 3.8-.9.6 0 2.4.3 3.6 1.9-3.2 1.9-2.7 6.4.5 8.3z"/></svg>
-        iOS
-      </span>
-      <span class="badge">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="#22c55e"><path d="M6 9v8a1 1 0 0 0 1 1h1v3a1 1 0 0 0 2 0v-3h4v3a1 1 0 0 0 2 0v-3h1a1 1 0 0 0 1-1V9H6zM4 9a1 1 0 0 0-2 0v6a1 1 0 0 0 2 0V9zm18 0a1 1 0 0 0-2 0v6a1 1 0 0 0 2 0V9zM15.6 3.5l1.2-1.2a.5.5 0 0 0-.7-.7l-1.4 1.4A6 6 0 0 0 12 2.4a6 6 0 0 0-2.7.6L7.9 1.6a.5.5 0 0 0-.7.7l1.2 1.2A5.6 5.6 0 0 0 6 8h12a5.6 5.6 0 0 0-2.4-4.5zM10 6a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6zm4 0a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6z"/></svg>
-        Android
-      </span>
-    </div>
-    <div class="release-date">Released June 22, 2026</div>
-  </header>
+  <h1>RFTag Release Notes</h1>
+  <p class="sub">iOS &amp; Android · tap a version to see what changed.</p>
 
-  <div class="section-title">What's new in 1.1</div>
+  <details open>
+    <summary>
+      <span class="ver">1.1</span>
+      <span class="date">June 22, 2026</span>
+      <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+    </summary>
+    <div class="body">
+      <h2>New features</h2>
+      <ul>
+        <li><b>Point of Interest (POI) pings</b> — ping a location to the whole group; it drops a map pin and points everyone's LED ring toward the spot.</li>
+        <li><b>POI card in chat</b> — pings appear as a tappable chat card with the coordinates and a shortcut to open the radar.</li>
+        <li><b>Off-screen icons stay on the edge</b> — when a member or target is outside the visible map, its icon pins to the edge of the radar as an arrow pointing toward it. Tap the arrow to recenter the map on it.</li>
+        <li><b>Fall Detection Alarm toggle</b> — turn the automatic alarm on or off from the profile screen. Turning it off asks to confirm, and the change is sent to your tag right away.</li>
+        <li><b>GPS source indicator</b> — your “you are here” marker now shows whether your position is coming from your RFTag's GPS or from your phone's GPS, so you always know which one is in use.</li>
+      </ul>
+      <h2>Firmware <span style="color:var(--muted);font-weight:400;">(v2.2.2-85)</span></h2>
+      <ul>
+        <li><b>POI “ping a location” mode</b> — the LED ring can now point at a fixed coordinate set by a leader; the ping is temporary and auto-clears after 5 minutes.</li>
+        <li><b>Fall detection on/off</b> — the tag now honors the app's Fall Detection toggle. The manual SOS button still works regardless of the setting.</li>
+        <li><b>Distinct emergency lights</b> — your own emergency now shows a slow red “breathe,” making it easy to tell apart from a received alert from someone else in the group.</li>
+        <li><b>Accurate no-fix reporting</b> — when the tag loses its GNSS fix it now reports NO_FIX correctly instead of showing a stale position, which powers the new GPS source indicator.</li>
+        <li><b>In-app PIN security</b> — BLE access is gated behind an in-app PIN (the value lasered on the device) instead of OS-level pairing.</li>
+        <li><b>Over-the-air BLE updates</b> — firmware can update over BLE for easier recovery and updates; images are still verified before they're applied. The app will prompt you to update.</li>
+      </ul>
+    </div>
+  </details>
 
-  <!-- POI pings -->
-  <div class="card">
-    <div class="card-head">
-      <span class="card-icon orange" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"></path>
-          <circle cx="12" cy="11" r="2.2"></circle>
-        </svg>
-      </span>
-      <h3>Point of Interest (POI) pings</h3>
-    </div>
-    <p>Leaders can now ping a location to the whole group over LoRa and chat. The ping drops a map pin and points every member's LED ring toward the spot — so the whole group heads the same way.</p>
-    <p>When a target is off-screen, a colored arrow pins to the edge of the radar pointing toward it. Tap the arrow to recenter the map on that location.</p>
-    <div class="badges">
-      <span class="badge">iOS</span>
-      <span class="badge">Android</span>
-      <span class="badge">Needs firmware update</span>
-    </div>
-  </div>
-
-  <!-- POI chat card -->
-  <div class="card">
-    <div class="card-head">
-      <span class="card-icon green" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L4 21l1.1-3.7A8.4 8.4 0 1 1 21 11.5z"></path>
-          <circle cx="12" cy="11" r="1.6" fill="#22c55e" stroke="none"></circle>
-        </svg>
-      </span>
-      <h3>New POI card in chat</h3>
-    </div>
-    <p>POI pings now appear as a friendly, tappable card in the group chat. It shows the pinged coordinates, a “Tap to open radar” shortcut, and a clear note that the orange LED ring is pointing toward that location.</p>
-    <div class="badges">
-      <span class="badge">iOS</span>
-      <span class="badge">Android</span>
-    </div>
-  </div>
-
-  <!-- Device icon picker -->
-  <div class="card">
-    <div class="card-head">
-      <span class="card-icon green" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2a10 10 0 1 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.3-.5-.8-.5-1.2 0-1 .8-1.8 1.8-1.8H17a5 5 0 0 0 5-5c0-4.6-4.5-8.7-10-8.7z"></path>
-          <circle cx="7.5" cy="11.5" r="1.2" fill="#22c55e" stroke="none"></circle>
-          <circle cx="11" cy="7.5" r="1.2" fill="#f97316" stroke="none"></circle>
-          <circle cx="15.5" cy="8" r="1.2" fill="#22c55e" stroke="none"></circle>
-        </svg>
-      </span>
-      <h3>Customizable device icon</h3>
-    </div>
-    <p>Personalize how your tag shows up on the device card. Tap the device image to pick a color — orange, red, green, yellow, or black. Green is the new out-of-the-box default.</p>
-    <div class="badges">
-      <span class="badge">iOS</span>
-      <span class="badge">Android</span>
-    </div>
-  </div>
-
-  <!-- Fall detection toggle -->
-  <div class="card">
-    <div class="card-head">
-      <span class="card-icon orange" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
-          <path d="M13.7 21a2 2 0 0 1-3.4 0"></path>
-        </svg>
-      </span>
-      <h3>Fall Detection Alarm toggle</h3>
-    </div>
-    <p>You can now turn the automatic fall-detection alarm on or off right from the profile screen, instead of it always running. The control appears below the device card when a tag is paired.</p>
-    <p>Turning it off asks for confirmation as a safety step, and the change is written to your wearable immediately.</p>
-    <div class="badges">
-      <span class="badge">iOS</span>
-      <span class="badge">Android</span>
-    </div>
-  </div>
-
-  <!-- Self marker GPS awareness -->
-  <div class="card">
-    <div class="card-head">
-      <span class="card-icon green" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="3"></circle>
-          <path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path>
-        </svg>
-      </span>
-      <h3>Smarter “you are here” marker</h3>
-    </div>
-    <p>Your own marker now reflects your tag's GPS status: it shows a phone-GPS badge when the tag has no fix, and greys out at your last known spot when there's no location at all — so you always know how accurate your position is.</p>
-    <div class="badges">
-      <span class="badge">iOS</span>
-      <span class="badge">Android</span>
-    </div>
-  </div>
-
-  <div class="section-title">Wearable firmware</div>
-
-  <div class="fw">
-    <div class="card-head">
-      <span class="card-icon orange" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="7" y="7" width="10" height="10" rx="1.5"></rect>
-          <path d="M9 3v2M12 3v2M15 3v2M9 19v2M12 19v2M15 19v2M3 9h2M3 12h2M3 15h2M19 9h2M19 12h2M19 15h2"></path>
-        </svg>
-      </span>
-      <h3>New firmware bundled with 1.1</h3>
-    </div>
-    <p style="color:#d8c3b3;margin-bottom:8px;">This release ships updated, signed wearable firmware that powers the new features:</p>
-    <ul>
-      <li>POI LED-ring targeting — the ring points toward a pinged location.</li>
-      <li>Clearer light distinction between your own tag and received signals.</li>
-      <li>Over-the-air BLE updates (DFU) without an unlock gate, for smoother future updates.</li>
-    </ul>
-    <p class="note">The app will prompt you to update your wearable. Keep your tag nearby and charged while the update runs.</p>
-  </div>
-
-  <footer>
-    <p>RFTag · Version 1.1 · iOS &amp; Android<br>
-    Thanks for being part of the group. Questions or feedback? Reach out to your RFTag contact.</p>
-  </footer>
+  <footer>RFTag · iOS &amp; Android</footer>
 
 </div>
 </body>
