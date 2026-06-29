@@ -108,19 +108,7 @@
   </div>
   <p class="sub" id="t-sub"></p>
 
-  <details open>
-    <summary>
-      <span class="ver">1.1</span>
-      <span class="date" id="t-date"></span>
-      <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
-    </summary>
-    <div class="body">
-      <h2 id="t-newTitle"></h2>
-      <ul id="t-newList"></ul>
-      <h2><span id="t-fwTitle"></span> <span class="muted">(v2.2.2-85)</span></h2>
-      <ul id="t-fwList"></ul>
-    </div>
-  </details>
+  <div id="versions"></div>
 
   <footer id="t-footer"></footer>
 
@@ -132,120 +120,225 @@ const I18N = {
     htmlLang: "en",
     notes: "RFTag Release Notes",
     sub: "iOS &amp; Android · tap a version to see what changed.",
-    date: "June 22, 2026",
     newTitle: "New features",
     fwTitle: "Firmware",
     dev: "In development",
     footer: "RFTag · iOS &amp; Android",
-    newList: [
-      { b: "Point of Interest (POI) pings", dev: true, d: "ping a location to the whole group; it drops a map pin and points everyone's LED ring toward the spot. Works under the right conditions today; still being refined and will need some refactoring." },
-      { b: "POI card in chat", dev: true, d: "pings appear as a tappable chat card with the coordinates and a shortcut to open the radar." },
-      { b: "Off-screen icons stay on the edge", d: "when a member or target is outside the visible map, its icon pins to the edge of the radar as an arrow pointing toward it. Tap the arrow to recenter the map on it." },
-      { b: "Fall Detection Alarm toggle", d: "turn the automatic alarm on or off from the profile screen. Turning it off asks to confirm, and the change is sent to your tag right away." },
-      { b: "GPS source indicator", d: "your “you are here” marker now shows whether your position is coming from your RFTag's GPS or from your phone's GPS, so you always know which one is in use." }
-    ],
-    fwList: [
-      { b: "Point of Interest (POI) targeting", dev: true, d: "when a leader pings a point of interest, the LED ring points the whole group toward it. The pinged location stays active until it's cleared or replaced by a new ping. Works under the right conditions today; still being refined and will need some refactoring." },
-      { b: "Fall detection on/off", d: "the tag now honors the app's Fall Detection toggle. The manual SOS button still works regardless of the setting." },
-      { b: "Distinct emergency lights", d: "your own emergency now shows a slow red “breathe,” making it easy to tell apart from a received alert from someone else in the group." },
-      { b: "Accurate no-fix reporting", d: "when the tag loses its GPS fix, the NO_FIX status is now written into its internal location list, so the app, the group, and the compass see the real no-fix state instead of a stale position. The last-known spot is kept but not saved to history." },
-      { b: "In-app PIN security", d: "BLE access is gated behind an in-app PIN (the value lasered on the device) instead of OS-level pairing." }
+    versions: [
+      {
+        ver: "1.2",
+        date: "June 29, 2026",
+        fwVersion: "v2.2.2-89",
+        newList: [
+          { b: "Firmware update alerts", d: "your device card now shows an “Update available” badge when your tag is running older firmware than the app. Tap it to open the updater and install the new firmware over Bluetooth." },
+          { b: "Last-known position survives GPS loss", d: "when a member loses their GPS fix they no longer jump to 0,0 or disappear from the map. Their last-known spot stays on screen and now persists even after the app is closed and reopened." },
+          { b: "Japanese text renders at a consistent size", d: "fixed a bug where the chat's emoji detector was too broad and treated Japanese kana (hiragana and katakana) as emoji, rendering them larger than the surrounding kanji. The emoji pattern was narrowed so all Japanese text now displays at a uniform size." }
+        ],
+        fwList: [
+          { b: "POI targeting is ready", d: "Point of Interest pings are out of testing and ready for everyday use. The LED ring locks onto a pinged location and keeps the group pointed toward it until you clear it or drop a new ping." },
+          { b: "Fewer false fall alarms", d: "the default fall-detection sensitivity was reduced (jerk threshold raised from 0.12g to 0.5g) so everyday bumps and movements are less likely to set off the alarm." },
+          { b: "Clearer POI color", d: "the point-of-interest marker now uses a darker orange so it's easier to pick out from the other map colors." }
+        ]
+      },
+      {
+        ver: "1.1",
+        date: "June 22, 2026",
+        fwVersion: "v2.2.2-85",
+        newList: [
+          { b: "Point of Interest (POI) pings", dev: true, d: "ping a location to the whole group; it drops a map pin and points everyone's LED ring toward the spot. Works under the right conditions today; still being refined and will need some refactoring." },
+          { b: "POI card in chat", dev: true, d: "pings appear as a tappable chat card with the coordinates and a shortcut to open the radar." },
+          { b: "Off-screen icons stay on the edge", d: "when a member or target is outside the visible map, its icon pins to the edge of the radar as an arrow pointing toward it. Tap the arrow to recenter the map on it." },
+          { b: "Fall Detection Alarm toggle", d: "turn the automatic alarm on or off from the profile screen. Turning it off asks to confirm, and the change is sent to your tag right away." },
+          { b: "GPS source indicator", d: "your “you are here” marker now shows whether your position is coming from your RFTag's GPS or from your phone's GPS, so you always know which one is in use." }
+        ],
+        fwList: [
+          { b: "Point of Interest (POI) targeting", dev: true, d: "when a leader pings a point of interest, the LED ring points the whole group toward it. The pinged location stays active until it's cleared or replaced by a new ping. Works under the right conditions today; still being refined and will need some refactoring." },
+          { b: "Fall detection on/off", d: "the tag now honors the app's Fall Detection toggle. The manual SOS button still works regardless of the setting." },
+          { b: "Distinct emergency lights", d: "your own emergency now shows a slow red “breathe,” making it easy to tell apart from a received alert from someone else in the group." },
+          { b: "Accurate no-fix reporting", d: "when the tag loses its GPS fix, the NO_FIX status is now written into its internal location list, so the app, the group, and the compass see the real no-fix state instead of a stale position. The last-known spot is kept but not saved to history." },
+          { b: "In-app PIN security", d: "BLE access is gated behind an in-app PIN (the value lasered on the device) instead of OS-level pairing." }
+        ]
+      }
     ]
   },
   es: {
     htmlLang: "es",
     notes: "Notas de la versión de RFTag",
     sub: "iOS y Android · toca una versión para ver los cambios.",
-    date: "22 de junio de 2026",
     newTitle: "Novedades",
     fwTitle: "Firmware",
     dev: "En desarrollo",
     footer: "RFTag · iOS y Android",
-    newList: [
-      { b: "Puntos de interés (POI)", dev: true, d: "envía una ubicación a todo el grupo; coloca un pin en el mapa y apunta el anillo LED de todos hacia ese punto. Funciona en las condiciones adecuadas por ahora; aún se está perfeccionando y necesitará algo de refactorización." },
-      { b: "Tarjeta de POI en el chat", dev: true, d: "los pings aparecen como una tarjeta tocable en el chat con las coordenadas y un acceso directo para abrir el radar." },
-      { b: "Los iconos fuera de pantalla quedan en el borde", d: "cuando un miembro u objetivo está fuera del mapa visible, su icono se fija en el borde del radar como una flecha que apunta hacia él. Toca la flecha para centrar el mapa en él." },
-      { b: "Interruptor de alarma de detección de caídas", d: "activa o desactiva la alarma automática desde la pantalla de perfil. Al desactivarla se pide confirmación, y el cambio se envía a tu dispositivo de inmediato." },
-      { b: "Indicador de fuente de GPS", d: "tu marcador de «estás aquí» ahora muestra si tu posición proviene del GPS de tu RFTag o del GPS de tu teléfono, para que siempre sepas cuál se está usando." }
-    ],
-    fwList: [
-      { b: "Orientación a puntos de interés (POI)", dev: true, d: "cuando un líder marca un punto de interés, el anillo LED apunta a todo el grupo hacia él. La ubicación marcada permanece activa hasta que se borra o se reemplaza por un nuevo ping. Funciona en las condiciones adecuadas por ahora; aún se está perfeccionando y necesitará algo de refactorización." },
-      { b: "Detección de caídas (on/off)", d: "el dispositivo ahora respeta el interruptor de detección de caídas de la app. El botón manual de SOS sigue funcionando sin importar el ajuste." },
-      { b: "Luces de emergencia diferenciadas", d: "tu propia emergencia ahora muestra una «respiración» roja lenta, lo que facilita distinguirla de una alerta recibida de otra persona del grupo." },
-      { b: "Reporte preciso de falta de señal", d: "cuando el dispositivo pierde la señal GPS, el estado NO_FIX ahora se escribe en su lista de ubicaciones interna, para que la app, el grupo y la brújula vean el estado real en lugar de una posición desactualizada. Se conserva la última ubicación conocida, pero no se guarda en el historial." },
-      { b: "Seguridad con PIN en la app", d: "el acceso BLE está protegido por un PIN dentro de la app (el valor grabado por láser en el dispositivo) en lugar del emparejamiento del sistema operativo." }
+    versions: [
+      {
+        ver: "1.2",
+        date: "29 de junio de 2026",
+        fwVersion: "v2.2.2-89",
+        newList: [
+          { b: "Avisos de actualización de firmware", d: "la tarjeta de tu dispositivo ahora muestra una insignia «Actualización disponible» cuando tu tag tiene un firmware más antiguo que la app. Tócala para abrir el actualizador e instalar el nuevo firmware por Bluetooth." },
+          { b: "La última posición conocida sobrevive a la pérdida de GPS", d: "cuando un miembro pierde la señal GPS ya no salta a 0,0 ni desaparece del mapa. Su última ubicación conocida permanece en pantalla y ahora se conserva incluso después de cerrar y reabrir la app." },
+          { b: "El texto en japonés se muestra con un tamaño uniforme", d: "se corrigió un error por el que el detector de emojis del chat era demasiado amplio y trataba los kana japoneses (hiragana y katakana) como emojis, mostrándolos más grandes que los kanji que los rodean. Se acotó el patrón de emojis para que todo el texto en japonés se muestre con un tamaño uniforme." }
+        ],
+        fwList: [
+          { b: "La orientación a POI ya está lista", d: "los puntos de interés salieron de la fase de pruebas y ya están listos para el uso diario. El anillo LED se fija en la ubicación marcada y mantiene al grupo apuntando hacia ella hasta que la borres o marques un nuevo punto." },
+          { b: "Menos falsas alarmas de caída", d: "se redujo la sensibilidad predeterminada de la detección de caídas (umbral de sacudida elevado de 0,12g a 0,5g) para que los golpes y movimientos cotidianos tengan menos probabilidad de activar la alarma." },
+          { b: "Color de POI más claro", d: "el marcador de punto de interés ahora usa un naranja más oscuro para distinguirse mejor de los demás colores del mapa." }
+        ]
+      },
+      {
+        ver: "1.1",
+        date: "22 de junio de 2026",
+        fwVersion: "v2.2.2-85",
+        newList: [
+          { b: "Puntos de interés (POI)", dev: true, d: "envía una ubicación a todo el grupo; coloca un pin en el mapa y apunta el anillo LED de todos hacia ese punto. Funciona en las condiciones adecuadas por ahora; aún se está perfeccionando y necesitará algo de refactorización." },
+          { b: "Tarjeta de POI en el chat", dev: true, d: "los pings aparecen como una tarjeta tocable en el chat con las coordenadas y un acceso directo para abrir el radar." },
+          { b: "Los iconos fuera de pantalla quedan en el borde", d: "cuando un miembro u objetivo está fuera del mapa visible, su icono se fija en el borde del radar como una flecha que apunta hacia él. Toca la flecha para centrar el mapa en él." },
+          { b: "Interruptor de alarma de detección de caídas", d: "activa o desactiva la alarma automática desde la pantalla de perfil. Al desactivarla se pide confirmación, y el cambio se envía a tu dispositivo de inmediato." },
+          { b: "Indicador de fuente de GPS", d: "tu marcador de «estás aquí» ahora muestra si tu posición proviene del GPS de tu RFTag o del GPS de tu teléfono, para que siempre sepas cuál se está usando." }
+        ],
+        fwList: [
+          { b: "Orientación a puntos de interés (POI)", dev: true, d: "cuando un líder marca un punto de interés, el anillo LED apunta a todo el grupo hacia él. La ubicación marcada permanece activa hasta que se borra o se reemplaza por un nuevo ping. Funciona en las condiciones adecuadas por ahora; aún se está perfeccionando y necesitará algo de refactorización." },
+          { b: "Detección de caídas (on/off)", d: "el dispositivo ahora respeta el interruptor de detección de caídas de la app. El botón manual de SOS sigue funcionando sin importar el ajuste." },
+          { b: "Luces de emergencia diferenciadas", d: "tu propia emergencia ahora muestra una «respiración» roja lenta, lo que facilita distinguirla de una alerta recibida de otra persona del grupo." },
+          { b: "Reporte preciso de falta de señal", d: "cuando el dispositivo pierde la señal GPS, el estado NO_FIX ahora se escribe en su lista de ubicaciones interna, para que la app, el grupo y la brújula vean el estado real en lugar de una posición desactualizada. Se conserva la última ubicación conocida, pero no se guarda en el historial." },
+          { b: "Seguridad con PIN en la app", d: "el acceso BLE está protegido por un PIN dentro de la app (el valor grabado por láser en el dispositivo) en lugar del emparejamiento del sistema operativo." }
+        ]
+      }
     ]
   },
   zh: {
     htmlLang: "zh",
     notes: "RFTag 更新日志",
     sub: "iOS 和 Android · 点按版本查看更新内容。",
-    date: "2026年6月22日",
     newTitle: "新功能",
     fwTitle: "固件",
     dev: "开发中",
     footer: "RFTag · iOS 和 Android",
-    newList: [
-      { b: "兴趣点（POI）标记", dev: true, d: "向整个群组发送一个位置；在地图上放置标记，并让所有人的 LED 环指向该地点。目前在适当条件下可用；仍在完善中，需要进一步重构。" },
-      { b: "聊天中的 POI 卡片", dev: true, d: "标记会以可点按的聊天卡片显示，包含坐标和打开雷达的快捷方式。" },
-      { b: "屏幕外图标停留在边缘", d: "当成员或目标位于可见地图之外时，其图标会固定在雷达边缘，显示为指向它的箭头。点按箭头可将地图居中到该目标。" },
-      { b: "跌倒检测警报开关", d: "在个人资料页面打开或关闭自动警报。关闭时会要求确认，更改会立即发送到你的设备。" },
-      { b: "GPS 来源指示", d: "你的“当前位置”标记现在会显示位置来自 RFTag 的 GPS 还是手机的 GPS，让你始终知道正在使用哪一个。" }
-    ],
-    fwList: [
-      { b: "兴趣点（POI）定位", dev: true, d: "当队长标记一个兴趣点时，LED 环会引导整个群组指向它。标记的位置会一直有效，直到被清除或被新的标记替换。目前在适当条件下可用；仍在完善中，需要进一步重构。" },
-      { b: "跌倒检测开/关", d: "设备现在会遵循 App 中的跌倒检测开关。无论该设置如何，手动 SOS 按钮始终有效。" },
-      { b: "可区分的紧急灯效", d: "你自己的紧急状态现在显示为缓慢的红色“呼吸”灯效，便于与来自群组其他成员的警报区分开。" },
-      { b: "准确的无定位上报", d: "当设备丢失 GPS 定位时，NO_FIX 状态现在会写入其内部位置列表，因此 App、群组和指南针会看到真实的无定位状态，而不是过时的位置。最后已知位置会保留，但不会保存到历史记录。" },
-      { b: "应用内 PIN 安全", d: "BLE 访问通过应用内 PIN（设备上激光刻印的数值）进行保护，而不是操作系统级别的配对。" }
+    versions: [
+      {
+        ver: "1.2",
+        date: "2026年6月29日",
+        fwVersion: "v2.2.2-89",
+        newList: [
+          { b: "固件更新提醒", d: "当你的 tag 运行的固件版本低于 App 时，设备卡片现在会显示“可更新”标记。点按即可打开更新程序，通过蓝牙安装新固件。" },
+          { b: "最后已知位置在 GPS 丢失后保留", d: "当成员失去 GPS 定位时，不再跳到 0,0 或从地图上消失。其最后已知位置会保留在屏幕上，并且现在即使关闭并重新打开 App 也会保留。" },
+          { b: "日文文本以一致的字号显示", d: "修复了聊天的表情符号检测范围过宽、将日文假名（平假名和片假名）误判为表情符号的问题，导致它们比周围的汉字显示得更大。现已收窄表情符号匹配规则，使所有日文文本以统一字号显示。" }
+        ],
+        fwList: [
+          { b: "POI 定位已就绪", d: "兴趣点标记已结束测试，可用于日常使用。LED 环会锁定标记的位置并让整个群组持续指向它，直到你清除它或设置新的标记。" },
+          { b: "减少误报的跌倒警报", d: "降低了跌倒检测的默认灵敏度（抖动阈值从 0.12g 提高到 0.5g），使日常碰撞和动作更不容易触发警报。" },
+          { b: "更清晰的 POI 颜色", d: "兴趣点标记现在使用更深的橙色，以便更容易从地图其他颜色中辨认出来。" }
+        ]
+      },
+      {
+        ver: "1.1",
+        date: "2026年6月22日",
+        fwVersion: "v2.2.2-85",
+        newList: [
+          { b: "兴趣点（POI）标记", dev: true, d: "向整个群组发送一个位置；在地图上放置标记，并让所有人的 LED 环指向该地点。目前在适当条件下可用；仍在完善中，需要进一步重构。" },
+          { b: "聊天中的 POI 卡片", dev: true, d: "标记会以可点按的聊天卡片显示，包含坐标和打开雷达的快捷方式。" },
+          { b: "屏幕外图标停留在边缘", d: "当成员或目标位于可见地图之外时，其图标会固定在雷达边缘，显示为指向它的箭头。点按箭头可将地图居中到该目标。" },
+          { b: "跌倒检测警报开关", d: "在个人资料页面打开或关闭自动警报。关闭时会要求确认，更改会立即发送到你的设备。" },
+          { b: "GPS 来源指示", d: "你的“当前位置”标记现在会显示位置来自 RFTag 的 GPS 还是手机的 GPS，让你始终知道正在使用哪一个。" }
+        ],
+        fwList: [
+          { b: "兴趣点（POI）定位", dev: true, d: "当队长标记一个兴趣点时，LED 环会引导整个群组指向它。标记的位置会一直有效，直到被清除或被新的标记替换。目前在适当条件下可用；仍在完善中，需要进一步重构。" },
+          { b: "跌倒检测开/关", d: "设备现在会遵循 App 中的跌倒检测开关。无论该设置如何，手动 SOS 按钮始终有效。" },
+          { b: "可区分的紧急灯效", d: "你自己的紧急状态现在显示为缓慢的红色“呼吸”灯效，便于与来自群组其他成员的警报区分开。" },
+          { b: "准确的无定位上报", d: "当设备丢失 GPS 定位时，NO_FIX 状态现在会写入其内部位置列表，因此 App、群组和指南针会看到真实的无定位状态，而不是过时的位置。最后已知位置会保留，但不会保存到历史记录。" },
+          { b: "应用内 PIN 安全", d: "BLE 访问通过应用内 PIN（设备上激光刻印的数值）进行保护，而不是操作系统级别的配对。" }
+        ]
+      }
     ]
   },
   ja: {
     htmlLang: "ja",
     notes: "RFTag リリースノート",
     sub: "iOS と Android · バージョンをタップすると変更内容が表示されます。",
-    date: "2026年6月22日",
     newTitle: "新機能",
     fwTitle: "ファームウェア",
     dev: "開発中",
     footer: "RFTag · iOS と Android",
-    newList: [
-      { b: "ポイント・オブ・インタレスト（POI）ピン", dev: true, d: "位置をグループ全体に送信します。地図にピンを立て、全員の LED リングがその地点を指します。現在は適切な条件下で動作します。改良中で、リファクタリングが必要です。" },
-      { b: "チャットの POI カード", dev: true, d: "ピンは座標とレーダーを開くショートカットを備えたタップ可能なチャットカードとして表示されます。" },
-      { b: "画面外のアイコンは端に表示", d: "メンバーやターゲットが表示中の地図の外にある場合、そのアイコンはレーダーの端に固定され、その方向を指す矢印として表示されます。矢印をタップすると地図がその対象を中心に表示されます。" },
-      { b: "転倒検知アラームの切り替え", d: "プロフィール画面から自動アラームのオン／オフを切り替えられます。オフにするときは確認が求められ、変更はすぐにデバイスへ送信されます。" },
-      { b: "GPS ソース表示", d: "「現在地」マーカーが、位置情報を RFTag の GPS から取得しているか、スマートフォンの GPS から取得しているかを表示するようになり、どちらを使用しているか常に分かります。" }
-    ],
-    fwList: [
-      { b: "ポイント・オブ・インタレスト（POI）ターゲティング", dev: true, d: "リーダーがポイントを指定すると、LED リングがグループ全体をその方向に導きます。指定した位置は、クリアするか新しいピンに置き換えるまで有効です。現在は適切な条件下で動作します。改良中で、リファクタリングが必要です。" },
-      { b: "転倒検知のオン／オフ", d: "デバイスがアプリの転倒検知の設定に従うようになりました。手動の SOS ボタンは設定に関係なく動作します。" },
-      { b: "区別できる緊急ライト", d: "自分自身の緊急状態がゆっくりとした赤い「呼吸」で表示されるようになり、グループの他のメンバーから受信したアラートと簡単に見分けられます。" },
-      { b: "正確な測位なし状態の報告", d: "デバイスが GPS の測位を失うと、NO_FIX 状態が内部の位置リストに書き込まれるようになり、アプリ・グループ・コンパスが古い位置ではなく実際の測位なし状態を認識します。最後にわかっている位置は保持されますが、履歴には保存されません。" },
-      { b: "アプリ内 PIN セキュリティ", d: "BLE アクセスは OS レベルのペアリングではなく、アプリ内 PIN（デバイスにレーザー刻印された値）で保護されます。" }
+    versions: [
+      {
+        ver: "1.2",
+        date: "2026年6月29日",
+        fwVersion: "v2.2.2-89",
+        newList: [
+          { b: "ファームウェア更新のお知らせ", d: "タグのファームウェアがアプリより古い場合、デバイスカードに「更新あり」バッジが表示されるようになりました。タップするとアップデーターが開き、Bluetooth 経由で新しいファームウェアをインストールできます。" },
+          { b: "GPS 喪失後も最後の既知位置を保持", d: "メンバーが GPS の測位を失っても、0,0 にジャンプしたり地図から消えたりしなくなりました。最後にわかっている位置が画面に残り、アプリを閉じて再度開いた後も保持されるようになりました。" },
+          { b: "日本語テキストが均一なサイズで表示", d: "チャットの絵文字判定の範囲が広すぎて、日本語のかな（ひらがな・カタカナ）を絵文字として扱い、周囲の漢字より大きく表示してしまう不具合を修正しました。絵文字の判定パターンを絞り込み、すべての日本語テキストが均一なサイズで表示されるようになりました。" }
+        ],
+        fwList: [
+          { b: "POI ターゲティングが正式対応", d: "ポイント・オブ・インタレストはテストを終え、日常的に使えるようになりました。LED リングは指定した位置をロックし、クリアするか新しいピンを設定するまでグループ全体をその方向に向け続けます。" },
+          { b: "転倒の誤報を低減", d: "転倒検知の既定の感度を下げ（ジャーク閾値を 0.12g から 0.5g に引き上げ）、日常の衝撃や動作でアラームが鳴りにくくなりました。" },
+          { b: "より見やすい POI の色", d: "ポイント・オブ・インタレストのマーカーが濃いオレンジになり、地図の他の色と見分けやすくなりました。" }
+        ]
+      },
+      {
+        ver: "1.1",
+        date: "2026年6月22日",
+        fwVersion: "v2.2.2-85",
+        newList: [
+          { b: "ポイント・オブ・インタレスト（POI）ピン", dev: true, d: "位置をグループ全体に送信します。地図にピンを立て、全員の LED リングがその地点を指します。現在は適切な条件下で動作します。改良中で、リファクタリングが必要です。" },
+          { b: "チャットの POI カード", dev: true, d: "ピンは座標とレーダーを開くショートカットを備えたタップ可能なチャットカードとして表示されます。" },
+          { b: "画面外のアイコンは端に表示", d: "メンバーやターゲットが表示中の地図の外にある場合、そのアイコンはレーダーの端に固定され、その方向を指す矢印として表示されます。矢印をタップすると地図がその対象を中心に表示されます。" },
+          { b: "転倒検知アラームの切り替え", d: "プロフィール画面から自動アラームのオン／オフを切り替えられます。オフにするときは確認が求められ、変更はすぐにデバイスへ送信されます。" },
+          { b: "GPS ソース表示", d: "「現在地」マーカーが、位置情報を RFTag の GPS から取得しているか、スマートフォンの GPS から取得しているかを表示するようになり、どちらを使用しているか常に分かります。" }
+        ],
+        fwList: [
+          { b: "ポイント・オブ・インタレスト（POI）ターゲティング", dev: true, d: "リーダーがポイントを指定すると、LED リングがグループ全体をその方向に導きます。指定した位置は、クリアするか新しいピンに置き換えるまで有効です。現在は適切な条件下で動作します。改良中で、リファクタリングが必要です。" },
+          { b: "転倒検知のオン／オフ", d: "デバイスがアプリの転倒検知の設定に従うようになりました。手動の SOS ボタンは設定に関係なく動作します。" },
+          { b: "区別できる緊急ライト", d: "自分自身の緊急状態がゆっくりとした赤い「呼吸」で表示されるようになり、グループの他のメンバーから受信したアラートと簡単に見分けられます。" },
+          { b: "正確な測位なし状態の報告", d: "デバイスが GPS の測位を失うと、NO_FIX 状態が内部の位置リストに書き込まれるようになり、アプリ・グループ・コンパスが古い位置ではなく実際の測位なし状態を認識します。最後にわかっている位置は保持されますが、履歴には保存されません。" },
+          { b: "アプリ内 PIN セキュリティ", d: "BLE アクセスは OS レベルのペアリングではなく、アプリ内 PIN（デバイスにレーザー刻印された値）で保護されます。" }
+        ]
+      }
     ]
   },
   ko: {
     htmlLang: "ko",
     notes: "RFTag 릴리스 노트",
     sub: "iOS 및 Android · 버전을 탭하면 변경 내용을 볼 수 있습니다.",
-    date: "2026년 6월 22일",
     newTitle: "새로운 기능",
     fwTitle: "펌웨어",
     dev: "개발 중",
     footer: "RFTag · iOS 및 Android",
-    newList: [
-      { b: "관심 지점(POI) 핑", dev: true, d: "위치를 그룹 전체에 전송합니다. 지도에 핀을 놓고 모두의 LED 링이 해당 지점을 가리키게 합니다. 현재는 적절한 조건에서 작동합니다. 아직 개선 중이며 리팩터링이 필요합니다." },
-      { b: "채팅의 POI 카드", dev: true, d: "핑은 좌표와 레이더 열기 바로가기가 포함된 탭 가능한 채팅 카드로 표시됩니다." },
-      { b: "화면 밖 아이콘이 가장자리에 표시", d: "멤버나 대상이 보이는 지도 밖에 있으면 해당 아이콘이 레이더 가장자리에 고정되어 그 방향을 가리키는 화살표로 표시됩니다. 화살표를 탭하면 지도가 해당 대상을 중심으로 이동합니다." },
-      { b: "낙상 감지 알람 토글", d: "프로필 화면에서 자동 알람을 켜거나 끌 수 있습니다. 끌 때는 확인을 요청하며, 변경 사항은 즉시 기기로 전송됩니다." },
-      { b: "GPS 출처 표시", d: "‘현재 위치’ 마커가 위치 정보를 RFTag의 GPS에서 가져오는지 휴대폰의 GPS에서 가져오는지 표시하여, 어느 것을 사용 중인지 항상 알 수 있습니다." }
-    ],
-    fwList: [
-      { b: "관심 지점(POI) 타기팅", dev: true, d: "리더가 관심 지점을 핑하면 LED 링이 그룹 전체를 그 방향으로 안내합니다. 핑한 위치는 지우거나 새 핑으로 교체할 때까지 활성 상태로 유지됩니다. 현재는 적절한 조건에서 작동합니다. 아직 개선 중이며 리팩터링이 필요합니다." },
-      { b: "낙상 감지 켜기/끄기", d: "이제 기기가 앱의 낙상 감지 설정을 따릅니다. 수동 SOS 버튼은 설정과 관계없이 계속 작동합니다." },
-      { b: "구분되는 비상 표시등", d: "이제 본인의 비상 상태가 느린 빨간색 ‘숨쉬기’로 표시되어 그룹 내 다른 사람에게서 받은 경보와 쉽게 구분할 수 있습니다." },
-      { b: "정확한 위치 없음 보고", d: "기기가 GPS 신호를 잃으면 NO_FIX 상태가 내부 위치 목록에 기록되어, 앱·그룹·나침반이 오래된 위치 대신 실제 위치 없음 상태를 인식합니다. 마지막으로 알려진 위치는 유지되지만 기록에는 저장되지 않습니다." },
-      { b: "앱 내 PIN 보안", d: "BLE 접근이 OS 수준 페어링 대신 앱 내 PIN(기기에 레이저로 각인된 값)으로 보호됩니다." }
+    versions: [
+      {
+        ver: "1.2",
+        date: "2026년 6월 29일",
+        fwVersion: "v2.2.2-89",
+        newList: [
+          { b: "펌웨어 업데이트 알림", d: "태그의 펌웨어가 앱보다 오래된 경우 기기 카드에 ‘업데이트 있음’ 배지가 표시됩니다. 탭하면 업데이트 도구가 열리고 블루투스로 새 펌웨어를 설치할 수 있습니다." },
+          { b: "GPS 손실 후에도 마지막 위치 유지", d: "멤버가 GPS 신호를 잃어도 더 이상 0,0으로 이동하거나 지도에서 사라지지 않습니다. 마지막으로 알려진 위치가 화면에 유지되며, 이제 앱을 닫았다가 다시 열어도 보존됩니다." },
+          { b: "일본어 텍스트가 일관된 크기로 표시", d: "채팅의 이모지 감지 범위가 너무 넓어 일본어 가나(히라가나·가타카나)를 이모지로 인식해 주변 한자보다 크게 표시하던 버그를 수정했습니다. 이모지 패턴을 좁혀 이제 모든 일본어 텍스트가 균일한 크기로 표시됩니다." }
+        ],
+        fwList: [
+          { b: "POI 타기팅 정식 지원", d: "관심 지점이 테스트를 마치고 일상적으로 사용할 수 있게 되었습니다. LED 링이 핑한 위치를 고정하여, 지우거나 새 핑을 설정할 때까지 그룹 전체가 그 방향을 향하도록 유지합니다." },
+          { b: "낙상 오경보 감소", d: "낙상 감지의 기본 민감도를 낮춰(저크 임계값을 0.12g에서 0.5g로 상향) 일상적인 충격이나 움직임이 알람을 울릴 가능성이 줄었습니다." },
+          { b: "더 또렷한 POI 색상", d: "관심 지점 마커가 더 진한 주황색을 사용하여 지도의 다른 색상과 더 쉽게 구분됩니다." }
+        ]
+      },
+      {
+        ver: "1.1",
+        date: "2026년 6월 22일",
+        fwVersion: "v2.2.2-85",
+        newList: [
+          { b: "관심 지점(POI) 핑", dev: true, d: "위치를 그룹 전체에 전송합니다. 지도에 핀을 놓고 모두의 LED 링이 해당 지점을 가리키게 합니다. 현재는 적절한 조건에서 작동합니다. 아직 개선 중이며 리팩터링이 필요합니다." },
+          { b: "채팅의 POI 카드", dev: true, d: "핑은 좌표와 레이더 열기 바로가기가 포함된 탭 가능한 채팅 카드로 표시됩니다." },
+          { b: "화면 밖 아이콘이 가장자리에 표시", d: "멤버나 대상이 보이는 지도 밖에 있으면 해당 아이콘이 레이더 가장자리에 고정되어 그 방향을 가리키는 화살표로 표시됩니다. 화살표를 탭하면 지도가 해당 대상을 중심으로 이동합니다." },
+          { b: "낙상 감지 알람 토글", d: "프로필 화면에서 자동 알람을 켜거나 끌 수 있습니다. 끌 때는 확인을 요청하며, 변경 사항은 즉시 기기로 전송됩니다." },
+          { b: "GPS 출처 표시", d: "‘현재 위치’ 마커가 위치 정보를 RFTag의 GPS에서 가져오는지 휴대폰의 GPS에서 가져오는지 표시하여, 어느 것을 사용 중인지 항상 알 수 있습니다." }
+        ],
+        fwList: [
+          { b: "관심 지점(POI) 타기팅", dev: true, d: "리더가 관심 지점을 핑하면 LED 링이 그룹 전체를 그 방향으로 안내합니다. 핑한 위치는 지우거나 새 핑으로 교체할 때까지 활성 상태로 유지됩니다. 현재는 적절한 조건에서 작동합니다. 아직 개선 중이며 리팩터링이 필요합니다." },
+          { b: "낙상 감지 켜기/끄기", d: "이제 기기가 앱의 낙상 감지 설정을 따릅니다. 수동 SOS 버튼은 설정과 관계없이 계속 작동합니다." },
+          { b: "구분되는 비상 표시등", d: "이제 본인의 비상 상태가 느린 빨간색 ‘숨쉬기’로 표시되어 그룹 내 다른 사람에게서 받은 경보와 쉽게 구분할 수 있습니다." },
+          { b: "정확한 위치 없음 보고", d: "기기가 GPS 신호를 잃으면 NO_FIX 상태가 내부 위치 목록에 기록되어, 앱·그룹·나침반이 오래된 위치 대신 실제 위치 없음 상태를 인식합니다. 마지막으로 알려진 위치는 유지되지만 기록에는 저장되지 않습니다." },
+          { b: "앱 내 PIN 보안", d: "BLE 접근이 OS 수준 페어링 대신 앱 내 PIN(기기에 레이저로 각인된 값)으로 보호됩니다." }
+        ]
+      }
     ]
   }
 };
@@ -257,16 +350,33 @@ function renderList(items, devLabel) {
   }).join('');
 }
 
+var CHEVRON = '<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>';
+
+function renderVersions(t) {
+  return t.versions.map(function (v, i) {
+    return '' +
+      '<details' + (i === 0 ? ' open' : '') + '>' +
+        '<summary>' +
+          '<span class="ver">' + v.ver + '</span>' +
+          '<span class="date">' + v.date + '</span>' +
+          CHEVRON +
+        '</summary>' +
+        '<div class="body">' +
+          '<h2>' + t.newTitle + '</h2>' +
+          '<ul>' + renderList(v.newList, t.dev) + '</ul>' +
+          '<h2>' + t.fwTitle + ' <span class="muted">(' + v.fwVersion + ')</span></h2>' +
+          '<ul>' + renderList(v.fwList, t.dev) + '</ul>' +
+        '</div>' +
+      '</details>';
+  }).join('');
+}
+
 function apply(lang) {
   var t = I18N[lang] || I18N.en;
   document.documentElement.lang = t.htmlLang;
   document.getElementById('t-notes').innerHTML = t.notes;
   document.getElementById('t-sub').innerHTML = t.sub;
-  document.getElementById('t-date').textContent = t.date;
-  document.getElementById('t-newTitle').textContent = t.newTitle;
-  document.getElementById('t-fwTitle').textContent = t.fwTitle;
-  document.getElementById('t-newList').innerHTML = renderList(t.newList, t.dev);
-  document.getElementById('t-fwList').innerHTML = renderList(t.fwList, t.dev);
+  document.getElementById('versions').innerHTML = renderVersions(t);
   document.getElementById('t-footer').innerHTML = t.footer;
 }
 
